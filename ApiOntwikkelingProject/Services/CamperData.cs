@@ -62,5 +62,12 @@ namespace ApiOntwikkelingProject.Services
         {
             return campers.FirstOrDefault(x => x.Id == id);
         }
+
+        public Camper Add(Camper newCamper)
+        {
+            newCamper.Id = campers.Max(x => x.Id) + 1;
+            campers.Add(newCamper);
+            return newCamper;
+        }
     }
 }

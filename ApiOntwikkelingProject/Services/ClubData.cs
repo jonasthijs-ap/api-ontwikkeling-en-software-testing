@@ -59,5 +59,12 @@ namespace ApiOntwikkelingProject.Services
         {
             return clubs.FirstOrDefault(x => x.Id == id);
         }
+
+        public Club Add(Club newClub)
+        {
+            newClub.Id = clubs.Max(x => x.Id) + 1;
+            clubs.Add(newClub);
+            return newClub;
+        }
     }
 }

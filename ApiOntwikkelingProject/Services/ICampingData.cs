@@ -7,5 +7,7 @@ namespace ApiOntwikkelingProject.Services
         IEnumerable<Camping> GetAll();
 
         Camping Get(int id);
+
+        Camping Add(Camping newCamping);
     }
 }

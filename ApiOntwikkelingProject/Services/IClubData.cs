@@ -7,5 +7,7 @@ namespace ApiOntwikkelingProject.Services
         IEnumerable<Club> GetAll();
 
         Club Get(int id);
+
+        Club Add(Club newClub);
     }
 }

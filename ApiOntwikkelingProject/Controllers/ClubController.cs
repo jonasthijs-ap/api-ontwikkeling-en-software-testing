@@ -1,5 +1,6 @@
 ﻿using ApiOntwikkelingProject.Entities;
 using ApiOntwikkelingProject.Services;
+using ApiOntwikkelingProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiOntwikkelingProject.Controllers
@@ -32,6 +33,27 @@ namespace ApiOntwikkelingProject.Controllers
             else
             {
                 return Ok(club);
+            }
+        }
+
+        [HttpPost("")]
+        public IActionResult Create([FromBody] ClubCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                Club newClub = new Club
+                {
+                    Name = model.Name,
+                    HeadOfficeAddress = model.HeadOfficeAddress,
+                    PartnerWithCampingId = model.PartnerWithCampingId
+                };
+
+                clubData.Add(newClub);
+                return CreatedAtAction(nameof(Details), new { newClub.Id }, newClub);
             }
         }
     }

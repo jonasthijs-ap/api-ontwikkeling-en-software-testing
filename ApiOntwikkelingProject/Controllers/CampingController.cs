@@ -1,5 +1,6 @@
 ﻿using ApiOntwikkelingProject.Entities;
 using ApiOntwikkelingProject.Services;
+using ApiOntwikkelingProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiOntwikkelingProject.Controllers
@@ -32,6 +33,26 @@ namespace ApiOntwikkelingProject.Controllers
             else
             {
                 return Ok(camping);
+            }
+        }
+
+        [HttpPost("")]
+        public IActionResult Create([FromBody] CampingCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                Camping newCamping = new Camping
+                {
+                    Name = model.Name,
+                    Address = model.Address
+                };
+
+                campingData.Add(newCamping);
+                return CreatedAtAction(nameof(Details), new { newCamping.Id }, newCamping);
             }
         }
     }

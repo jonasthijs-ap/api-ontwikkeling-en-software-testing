@@ -1,5 +1,6 @@
 ﻿using ApiOntwikkelingProject.Entities;
 using ApiOntwikkelingProject.Services;
+using ApiOntwikkelingProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiOntwikkelingProject.Controllers
@@ -32,6 +33,28 @@ namespace ApiOntwikkelingProject.Controllers
             else
             {
                 return Ok(camper);
+            }
+        }
+
+        [HttpPost("")]
+        public IActionResult Create([FromBody] CamperCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                Camper newCamper = new Camper
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    MemberFromClubId = model.MemberFromClubId
+                };
+
+                camperData.Add(newCamper);
+                return CreatedAtAction(nameof(Details), new { newCamper.Id }, newCamper);
             }
         }
     }
