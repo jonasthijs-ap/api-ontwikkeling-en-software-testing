@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiOntwikkelingProject.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CampingController : Controller
     {
         private readonly ICampingData campingData;
@@ -14,13 +14,13 @@ namespace ApiOntwikkelingProject.Controllers
             this.campingData = campingData;
         }
 
-        [Route("")]
+        [HttpGet("")]
         public IActionResult Index()
         {
-            return new ObjectResult(campingData.GetAll());
+            return new OkObjectResult(campingData.GetAll());
         }
 
-        [Route("{id?}")]
+        [HttpGet("{id}")]
         public IActionResult Details(int id)
         {
             Camping camping = campingData.Get(id);

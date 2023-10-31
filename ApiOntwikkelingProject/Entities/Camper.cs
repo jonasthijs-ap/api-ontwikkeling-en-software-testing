@@ -11,5 +11,7 @@ namespace ApiOntwikkelingProject.Entities
         public string LastName { get; set; }
 
         public Address Address { get; set; }
+
+        public int MemberFromClubId { get; set; }
     }
 }

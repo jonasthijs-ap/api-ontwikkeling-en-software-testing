@@ -10,6 +10,6 @@ namespace ApiOntwikkelingProject.Entities
 
         public Address HeadOfficeAddress { get; set; }
 
-        public List<Camper> Members { get; set; }
+        public int PartnerWithCampingId { get; set; }
     }
 }

@@ -9,7 +9,5 @@ namespace ApiOntwikkelingProject.Entities
         public string Name { get; set; }
 
         public Address Address { get; set; }
-
-        public List<Club> Partners { get; set; }
     }
 }
