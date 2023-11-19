@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiOntwikkelingProject.ViewModels
 {
-    public class CampingCreateViewModel
+    public class CamperUpdateViewModel
     {
-        [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        [Required]
+        public string LastName { get; set; }
+
         public Address Address { get; set; }
     }
 }

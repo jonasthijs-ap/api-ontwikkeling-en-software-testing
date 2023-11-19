@@ -8,6 +8,10 @@ namespace ApiOntwikkelingProject.Services
 
         Camping Get(int id);
 
-        Camping Add(Camping newCamping);
+        Camping Add(Camping newElement);
+
+        void Delete(int id);
+
+        void Update(Camping newData);
     }
 }

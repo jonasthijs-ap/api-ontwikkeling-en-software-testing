@@ -10,6 +10,7 @@ namespace ApiOntwikkelingProject
             services.AddScoped<IClubData, ClubData>();
             services.AddScoped<ICampingData, CampingData>();
             services.AddControllers();
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -17,6 +18,12 @@ namespace ApiOntwikkelingProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(swagger =>
+                {
+                    swagger.SwaggerEndpoint("./swagger/v1/swagger.json", "API Ontwikkeling Project");
+                    swagger.RoutePrefix = string.Empty;
+                });
             }
 
             app.UseRouting();

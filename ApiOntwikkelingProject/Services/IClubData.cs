@@ -8,6 +8,10 @@ namespace ApiOntwikkelingProject.Services
 
         Club Get(int id);
 
-        Club Add(Club newClub);
+        Club Add(Club newElement);
+
+        void Delete(int id);
+
+        void Update(Club newData);
     }
 }

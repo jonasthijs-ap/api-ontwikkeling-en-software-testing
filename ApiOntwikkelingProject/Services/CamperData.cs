@@ -63,11 +63,25 @@ namespace ApiOntwikkelingProject.Services
             return campers.FirstOrDefault(x => x.Id == id);
         }
 
-        public Camper Add(Camper newCamper)
+        public Camper Add(Camper newElement)
         {
-            newCamper.Id = campers.Max(x => x.Id) + 1;
-            campers.Add(newCamper);
-            return newCamper;
+            newElement.Id = campers.Max(x => x.Id) + 1;
+            campers.Add(newElement);
+            return newElement;
+        }
+
+        public void Delete(int id)
+        {
+            Camper elementToBeDeleted = Get(id);
+            campers.Remove(elementToBeDeleted);
+        }
+
+        public void Update(Camper newData)
+        {
+            Camper elementToBeUpdated = Get(newData.Id);
+            int indexToBeUpdated = campers.IndexOf(elementToBeUpdated);
+
+            campers[indexToBeUpdated] = newData;
         }
     }
 }

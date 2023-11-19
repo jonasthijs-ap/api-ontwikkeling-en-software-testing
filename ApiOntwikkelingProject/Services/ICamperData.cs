@@ -8,6 +8,10 @@ namespace ApiOntwikkelingProject.Services
 
         Camper Get(int id);
 
-        Camper Add(Camper newCamper);
+        Camper Add(Camper newElement);
+
+        void Delete(int id);
+
+        void Update(Camper newData);
     }
 }

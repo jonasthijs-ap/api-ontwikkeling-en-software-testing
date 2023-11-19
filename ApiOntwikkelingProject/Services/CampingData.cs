@@ -57,11 +57,25 @@ namespace ApiOntwikkelingProject.Services
             return campings.FirstOrDefault(x => x.Id == id);
         }
 
-        public Camping Add(Camping newCamping)
+        public Camping Add(Camping newElement)
         {
-            newCamping.Id = campings.Max(x => x.Id) + 1;
-            campings.Add(newCamping);
-            return newCamping;
+            newElement.Id = campings.Max(x => x.Id) + 1;
+            campings.Add(newElement);
+            return newElement;
+        }
+
+        public void Delete(int id)
+        {
+            Camping elementToBeDeleted = Get(id);
+            campings.Remove(elementToBeDeleted);
+        }
+
+        public void Update(Camping newData)
+        {
+            Camping elementToBeUpdated = Get(newData.Id);
+            int indexToBeUpdated = campings.IndexOf(elementToBeUpdated);
+
+            campings[indexToBeUpdated] = newData;
         }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using ApiOntwikkelingProject.Entities.Properties;
-using System.ComponentModel.DataAnnotations;
 
 namespace ApiOntwikkelingProject.ViewModels
 {
-    public class CampingCreateViewModel
+    public class CampingUpdateViewModel
     {
-        [Required]
         public string Name { get; set; }
 
-        [Required]
         public Address Address { get; set; }
     }
 }

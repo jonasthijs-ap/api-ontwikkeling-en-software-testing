@@ -26,7 +26,7 @@ namespace ApiOntwikkelingProject.Controllers
         {
             Camping camping = campingData.Get(id);
 
-            if (camping == null)
+            if (camping is null)
             {
                 return NotFound();
             }
@@ -53,6 +53,51 @@ namespace ApiOntwikkelingProject.Controllers
 
                 campingData.Add(newCamping);
                 return CreatedAtAction(nameof(Details), new { newCamping.Id }, newCamping);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Camping camping = campingData.Get(id);
+
+            if (camping is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                campingData.Delete(id);
+                return NoContent();
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] CampingUpdateViewModel model, int id)
+        {
+            Camping camping = campingData.Get(id);
+            if (camping is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    Camping newCampingData = new Camping
+                    {
+                        Id = id,
+                        Name = model.Name,
+                        Address = model.Address
+                    };
+
+                    campingData.Update(newCampingData);
+                    return NoContent();
+                }
             }
         }
     }

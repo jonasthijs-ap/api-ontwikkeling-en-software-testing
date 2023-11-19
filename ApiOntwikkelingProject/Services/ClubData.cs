@@ -60,11 +60,25 @@ namespace ApiOntwikkelingProject.Services
             return clubs.FirstOrDefault(x => x.Id == id);
         }
 
-        public Club Add(Club newClub)
+        public Club Add(Club newElement)
         {
-            newClub.Id = clubs.Max(x => x.Id) + 1;
-            clubs.Add(newClub);
-            return newClub;
+            newElement.Id = clubs.Max(x => x.Id) + 1;
+            clubs.Add(newElement);
+            return newElement;
+        }
+
+        public void Delete(int id)
+        {
+            Club elementToBeDeleted = Get(id);
+            clubs.Remove(elementToBeDeleted);
+        }
+
+        public void Update(Club newData)
+        {
+            Club elementToBeUpdated = Get(newData.Id);
+            int indexToBeUpdated = clubs.IndexOf(elementToBeUpdated);
+
+            clubs[indexToBeUpdated] = newData;
         }
     }
 }

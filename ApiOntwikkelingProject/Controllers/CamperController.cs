@@ -26,7 +26,7 @@ namespace ApiOntwikkelingProject.Controllers
         {
             Camper camper = camperData.Get(id);
 
-            if (camper == null)
+            if (camper is null)
             {
                 return NotFound();
             }
@@ -55,6 +55,52 @@ namespace ApiOntwikkelingProject.Controllers
 
                 camperData.Add(newCamper);
                 return CreatedAtAction(nameof(Details), new { newCamper.Id }, newCamper);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Camper camper = camperData.Get(id);
+
+            if (camper is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                camperData.Delete(id);
+                return NoContent();
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] CamperUpdateViewModel model, int id)
+        {
+            Camper camper = camperData.Get(id);
+            if (camper is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    Camper newCamperData = new Camper
+                    {
+                        Id = id,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Address = model.Address
+                    };
+
+                    camperData.Update(newCamperData);
+                    return NoContent();
+                }
             }
         }
     }

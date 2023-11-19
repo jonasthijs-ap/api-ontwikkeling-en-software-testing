@@ -26,7 +26,7 @@ namespace ApiOntwikkelingProject.Controllers
         {
             Club club = clubData.Get(id);
 
-            if (club == null)
+            if (club is null)
             {
                 return NotFound();
             }
@@ -54,6 +54,51 @@ namespace ApiOntwikkelingProject.Controllers
 
                 clubData.Add(newClub);
                 return CreatedAtAction(nameof(Details), new { newClub.Id }, newClub);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            Club club = clubData.Get(id);
+
+            if (club is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                clubData.Delete(id);
+                return NoContent();
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] ClubUpdateViewModel model, int id)
+        {
+            Club club = clubData.Get(id);
+            if (club is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    Club newClubData = new Club
+                    {
+                        Id = id,
+                        Name = model.Name,
+                        HeadOfficeAddress = model.HeadOfficeAddress
+                    };
+
+                    clubData.Update(newClubData);
+                    return NoContent();
+                }
             }
         }
     }
