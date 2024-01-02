@@ -18,7 +18,7 @@ namespace ApiOntwikkelingProject.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return new OkObjectResult(campingData.GetAll());
+            return Ok(campingData.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -84,18 +84,21 @@ namespace ApiOntwikkelingProject.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
                 else
                 {
-                    Camping newCampingData = new Camping
+                    if (model.Name is not null)
                     {
-                        Id = id,
-                        Name = model.Name,
-                        Address = model.Address
-                    };
+                        camping.Name = model.Name;
+                    }
 
-                    campingData.Update(newCampingData);
+                    if (model.Address is not null)
+                    {
+                        camping.Address = model.Address;
+                    }
+
+                    campingData.Update(camping);
                     return NoContent();
                 }
             }

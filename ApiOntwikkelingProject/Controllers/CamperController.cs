@@ -18,7 +18,7 @@ namespace ApiOntwikkelingProject.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return new OkObjectResult(camperData.GetAll());
+            return Ok(camperData.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -50,7 +50,7 @@ namespace ApiOntwikkelingProject.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Address = model.Address,
-                    MemberFromClubId = model.MemberFromClubId
+                    ClubId = model.ClubId
                 };
 
                 camperData.Add(newCamper);
@@ -86,19 +86,28 @@ namespace ApiOntwikkelingProject.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
                 else
                 {
-                    Camper newCamperData = new Camper
+                    if (model.FirstName is not null)
                     {
-                        Id = id,
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        Address = model.Address
-                    };
+                        camper.FirstName = model.FirstName;
+                    }
 
-                    camperData.Update(newCamperData);
+                    if (model.LastName is not null)
+                    {
+                        camper.LastName = model.LastName;
+                    }
+                    
+                    if (model.Address is not null)
+                    {
+                        camper.Address = model.Address;
+                    }
+
+                    camper.ClubId = model.ClubId;
+
+                    camperData.Update(camper);
                     return NoContent();
                 }
             }

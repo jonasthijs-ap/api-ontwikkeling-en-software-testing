@@ -18,7 +18,7 @@ namespace ApiOntwikkelingProject.Controllers
         [HttpGet("")]
         public IActionResult Index()
         {
-            return new OkObjectResult(clubData.GetAll());
+            return Ok(clubData.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -49,7 +49,7 @@ namespace ApiOntwikkelingProject.Controllers
                 {
                     Name = model.Name,
                     HeadOfficeAddress = model.HeadOfficeAddress,
-                    PartnerWithCampingId = model.PartnerWithCampingId
+                    CampingId = model.CampingId
                 };
 
                 clubData.Add(newClub);
@@ -85,18 +85,23 @@ namespace ApiOntwikkelingProject.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
                 else
                 {
-                    Club newClubData = new Club
+                    if (model.Name is not null)
                     {
-                        Id = id,
-                        Name = model.Name,
-                        HeadOfficeAddress = model.HeadOfficeAddress
-                    };
+                        club.Name = model.Name;
+                    }
 
-                    clubData.Update(newClubData);
+                    if (model.HeadOfficeAddress is not null)
+                    {
+                        club.HeadOfficeAddress = model.HeadOfficeAddress;
+                    }
+
+                    club.CampingId = model.CampingId;
+
+                    clubData.Update(club);
                     return NoContent();
                 }
             }

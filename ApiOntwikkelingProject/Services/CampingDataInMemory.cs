@@ -3,11 +3,11 @@ using ApiOntwikkelingProject.Entities.Properties;
 
 namespace ApiOntwikkelingProject.Services
 {
-    public class CampingData : ICampingData
+    public class CampingDataInMemory : ICampingData
     {
         private static List<Camping> campings;
 
-        static CampingData()
+        static CampingDataInMemory()
         {
             campings = new List<Camping>
             {
@@ -20,7 +20,8 @@ namespace ApiOntwikkelingProject.Services
                         City = "Nieuwpoort",
                         Street = "Vismarkt",
                         HouseNumber = "2"
-                    }
+                    },
+                    MemberedClubs = new ClubDataInMemory().GetAll().ToList().GetRange(2, 1)
                 },
                 new Camping
                 {
@@ -31,7 +32,8 @@ namespace ApiOntwikkelingProject.Services
                         City = "Lille",
                         Street = "Boskant",
                         HouseNumber = "6"
-                    }
+                    },
+                    MemberedClubs = new ClubDataInMemory().GetAll().ToList().GetRange(1, 1)
                 },
                 new Camping
                 {
@@ -42,11 +44,12 @@ namespace ApiOntwikkelingProject.Services
                         City = "Durbuy",
                         Street = "Rue du Village",
                         HouseNumber = "36"
-                    }
+                    },
+                    MemberedClubs = new ClubDataInMemory().GetAll().ToList().GetRange(0, 2)
                 }
             };
         }
-        
+    
         public IEnumerable<Camping> GetAll()
         {
             return campings;

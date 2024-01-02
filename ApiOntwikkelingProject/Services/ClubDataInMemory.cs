@@ -3,11 +3,11 @@ using ApiOntwikkelingProject.Entities.Properties;
 
 namespace ApiOntwikkelingProject.Services
 {
-    public class ClubData : IClubData
+    public class ClubDataInMemory : IClubData
     {
         private static List<Club> clubs;
 
-        static ClubData()
+        static ClubDataInMemory()
         {
             clubs = new List<Club>
             {
@@ -21,7 +21,7 @@ namespace ApiOntwikkelingProject.Services
                         Street = "Grote Markt",
                         HouseNumber = "18"
                     },
-                    PartnerWithCampingId = 3
+                    Members = new CamperDataInMemory().GetAll().ToList().GetRange(0, 2)
                 },
                 new Club
                 {
@@ -33,7 +33,7 @@ namespace ApiOntwikkelingProject.Services
                         Street = "Veldhoflaan",
                         HouseNumber = "52"
                     },
-                    PartnerWithCampingId = 2
+                    Members = new CamperDataInMemory().GetAll().ToList().GetRange(1, 1)
                 },
                 new Club
                 {
@@ -45,11 +45,11 @@ namespace ApiOntwikkelingProject.Services
                         Street = "Waterpoortstraat",
                         HouseNumber = "124a"
                     },
-                    PartnerWithCampingId = 1
+                    Members = new CamperDataInMemory().GetAll().ToList().GetRange(0, 1)
                 }
             };
         }
-        
+    
         public IEnumerable<Club> GetAll()
         {
             return clubs;

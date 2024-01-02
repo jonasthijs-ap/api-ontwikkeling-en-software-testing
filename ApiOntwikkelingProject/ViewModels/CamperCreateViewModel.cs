@@ -1,5 +1,6 @@
 ﻿using ApiOntwikkelingProject.Entities.Properties;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiOntwikkelingProject.ViewModels
 {
@@ -14,7 +15,7 @@ namespace ApiOntwikkelingProject.ViewModels
         [Required]
         public Address Address { get; set; }
 
-        [Required, Range(1, int.MaxValue), RegularExpression(@"^[0-9]*$")]
-        public int MemberFromClubId { get; set; }
+        [Required, Range(1, int.MaxValue), ForeignKey("ClubId")]
+        public int ClubId { get; set; }
     }
 }
